@@ -1,16 +1,18 @@
 # Secure Reverse Proxy for HTTPS File Server
 
+### I created this as an assignment for my Network and System Security - II course.
+
 This project implements a secure reverse proxy that interfaces with an HTTPS server running on port 443, acting as a file-sharing service. Clients connect to the reverse proxy over a TLS-encrypted connection, authenticate using PAM, and can perform file operations through a command-line interface.
 
 ## System Architecture
 
-### 1. HTTPS Server (VM2 - FreeBSD)
+### 1. HTTPS Server (VM2)
 - Nginx server running on port 443
 - Serves files from `/var/www/files`
 - Handles PUT requests in `/var/www/files/upload` directory
 - TLS encryption using server certificates
 
-### 2. Reverse Proxy (VM1 - GhostBSD)
+### 2. Reverse Proxy (VM1)
 - Runs on port 8443
 - Authenticates users via PAM
 - Forwards authenticated requests to HTTPS server
@@ -61,20 +63,8 @@ certs/
 
 ### 3. Deploy Certificates
 
-Use the provided `deploy.sh` script to distribute certificates:
-
-```bash
-# Make deploy script executable
-chmod +x deploy.sh
-
-# Run deployment
-./deploy.sh
-```
-
-This will:
-1. Generate certificates
-2. Copy HTTPS server certificates to VM2 (FreeBSD)
-3. Copy reverse proxy certificates to VM1 (GhostBSD)
+1. Copy HTTPS server certificates to VM2 
+2. Copy reverse proxy certificates to VM1 
 
 ### 4. Certificate Renewal
 
